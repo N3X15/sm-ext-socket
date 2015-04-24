@@ -9,6 +9,7 @@ else:
   builder.compiler.cflags += '-g -ggdb3'.split()
 builder.compiler.linkflags += '-lpthread -Wl,-Bstatic -static-libgcc -lboost_thread -lboost_system -lstdc++ -Wl,-Bdynamic'.split()
 builder.compiler.cflags += '-D_LINUX -DSOURCEMOD_BUILD -Wall -fPIC -m32 -Wno-c++0x-compat'.split()
+builder.compiler.cxxflags.append('-std=c++11')
 
 MMS_DIR = builder.options.mms_dir
 SM_DIR = builder.options.sm_dir
