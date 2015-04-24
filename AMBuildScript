@@ -36,9 +36,9 @@ socket.sources += [
     'Extension.cpp',
     'sdk/smsdk_ext.cpp'
 ]
-socket.Add(socket
+sockout = builder.Add(socket)
 
 builder.RunBuildScripts(
   ['PackageScript'],
-  {'socket':socket}
+  {'socket':sockout}
 )

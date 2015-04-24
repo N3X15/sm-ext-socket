@@ -5,8 +5,9 @@ builder.SetBuildFolder('dist')
 
 projdir = builder.sourcePath
 
-def NormalizePath(path,prefix='.')
-    return os.path.join([prefix]+path)
+
+def NormalizePath(path, prefix='.'):
+  return os.path.join(*[prefix] + path.split('/'))
 
 moves = {
     'socket.inc': 'addons/sourcemod/scripting/include',
@@ -17,6 +18,11 @@ moves = {
     #'LICENSE': 'addons/sourcemod/documentation/socket',
 }
 
-for src,dest in moves.items():
-    builder.AddCopy(NormalizePath(src,projdir),NormalizePath(dest,'.'))
-builder.AddCopy(socket.binary,NormalizePath('addons/sourcemod/extensions'))
+for src, dest in moves.items():
+  newfolderpath = NormalizePath(dest, '.') + os.sep
+  realnewfp = os.path.realpath(os.path.join(builder.buildFolder, newfolderpath))
+  if not os.path.isdir(realnewfp):
+    os.makedirs(realnewfp)
+    print('mkdir -p ' + realnewfp)
+  builder.AddCopy(NormalizePath(src, projdir), newfolderpath)
+builder.AddCopy(socket.binary, NormalizePath('addons/sourcemod/extensions'))
