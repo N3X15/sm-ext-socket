@@ -7,7 +7,7 @@ if builder.options.debug:
 else:
   # DEBUG_FLAGS
   builder.compiler.cflags += '-g -ggdb3'.split()
-builder.compiler.linkflags += '-lpthread -Wl,-Bstatic -static-libgcc -lboost_thread -lboost_system -lstdc++ -Wl,-Bdynamic'.split()
+builder.compiler.linkflags += '-m32 -lpthread -Wl,-Bstatic -static-libgcc -lboost_thread -lboost_system -lstdc++ -Wl,-Bdynamic'.split()
 builder.compiler.cflags += '-D_LINUX -DSOURCEMOD_BUILD -Wall -fPIC -m32 -Wno-c++0x-compat'.split()
 builder.compiler.cxxflags.append('-std=c++11')
 
