@@ -20,6 +20,7 @@ builder.compiler.includes += [
     MMS_DIR,
     os.path.join(MMS_DIR, 'sourcehook'),
     os.path.join(MMS_DIR, 'sourcemm'),
+    os.path.join(SM_DIR, 'public'), # IExtensionSys.h
     os.path.join(SM_DIR, 'public', 'extensions'),
     os.path.join(SM_DIR, 'sourcepawn', 'include'),
     os.path.join(SM_DIR, 'public', 'amtl', 'include'),  # May not be needed.
