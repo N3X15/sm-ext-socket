@@ -1,0 +1,22 @@
+# PackageScript
+import os
+
+builder.SetBuildFolder('dist')
+
+projdir = builder.sourcePath
+
+def NormalizePath(path,prefix='.')
+    return os.path.join([prefix]+path)
+
+moves = {
+    'socket.inc': 'addons/sourcemod/scripting/include',
+    'examples/example.sp': 'addons/sourcemod/scripting/examples/socket',
+    'examples/listenexample.sp': 'addons/sourcemod/scripting/examples/socket',
+    'examples/selftest.sp': 'addons/sourcemod/scripting/examples/socket',
+    #'README.md': 'addons/sourcemod/documentation/socket',
+    #'LICENSE': 'addons/sourcemod/documentation/socket',
+}
+
+for src,dest in moves.items():
+    builder.AddCopy(NormalizePath(src,projdir),NormalizePath(dest,'.'))
+builder.AddCopy(socket.binary,NormalizePath('addons/sourcemod/extensions'))

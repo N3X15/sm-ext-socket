@@ -27,8 +27,8 @@ builder.compiler.includes += [
     os.path.join(SM_DIR, 'public', 'amtl', 'include'),  # May not be needed.
 ]
 
-program = builder.compiler.Library('socket.ext')
-program.sources += [
+socket = builder.compiler.Library('socket.ext')
+socket.sources += [
     'Socket.cpp',
     'SocketHandler.cpp',
     'Callback.cpp',
@@ -36,4 +36,9 @@ program.sources += [
     'Extension.cpp',
     'sdk/smsdk_ext.cpp'
 ]
-builder.Add(program)
+socket.Add(socket
+
+builder.RunBuildScripts(
+  ['PackageScript'],
+  {'socket':socket}
+)
