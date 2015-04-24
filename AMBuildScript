@@ -1,0 +1,36 @@
+# vim: set sts=2 ts=8 sw=2 tw=99 et ft=python:
+import os
+builder.DetectCompilers()
+if builder.options.debug:
+  # OPT_FLAGS
+  builder.compiler.cflags += '-O3 -funroll-loops -s -pipe -fno-strict-aliasing'.split()
+else:
+  # DEBUG_FLAGS
+  builder.compiler.cflags += '-g -ggdb3'.split()
+builder.compiler.linkflags += '-lpthread -Wl,-Bstatic -static-libgcc -lboost_thread -lboost_system -lstdc++ -Wl,-Bdynamic'.split()
+builder.compiler.cflags += '-D_LINUX -DSOURCEMOD_BUILD -Wall -fPIC -m32'.split()
+
+MMS_DIR = builder.options.mms_dir
+SM_DIR = builder.options.sm_dir
+SOCKET_DIR = builder.options.socket_dir
+
+builder.compiler.includes += [
+    SOCKET_DIR,
+    MMS_DIR,
+    os.path.join(MMS_DIR, 'sourcehook'),
+    os.path.join(MMS_DIR, 'sourcemm'),
+    os.path.join(SM_DIR, 'public'),
+    os.path.join(SM_DIR, 'public', 'sourcepawn'),
+    os.path.join(SM_DIR, 'public', 'extensions')
+]
+
+program = builder.compiler.Library('socket.ext')
+program.sources += [
+    'Socket.cpp',
+    'SocketHandler.cpp',
+    'Callback.cpp',
+    'CallbackHandler.cpp',
+    'Extension.cpp',
+    'sdk/smsdk_ext.cpp'
+]
+builder.Add(program)
