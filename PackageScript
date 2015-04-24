@@ -22,7 +22,7 @@ for src, dest in moves.items():
   newfolderpath = NormalizePath(dest, '.') + os.sep
   f = builder.AddFolder(newfolderpath)
   #realnewfp = os.path.realpath(os.path.join(builder.buildFolder, newfolderpath))
-  #if not os.path.isdir(realnewfp):
+  # if not os.path.isdir(realnewfp):
   #  os.makedirs(realnewfp)
   #  print('mkdir -p ' + realnewfp)
   builder.AddCopy(NormalizePath(src, projdir), f)
