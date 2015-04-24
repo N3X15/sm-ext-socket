@@ -14,14 +14,15 @@ MMS_DIR = builder.options.mms_dir
 SM_DIR = builder.options.sm_dir
 SOCKET_DIR = builder.options.socket_dir
 
+# https://github.com/alliedmodders/sourcemod/blob/master/AMBuildScript#L330
 builder.compiler.includes += [
     SOCKET_DIR,
     MMS_DIR,
     os.path.join(MMS_DIR, 'sourcehook'),
     os.path.join(MMS_DIR, 'sourcemm'),
-    os.path.join(SM_DIR, 'public'),
-    os.path.join(SM_DIR, 'public', 'sourcepawn'),
-    os.path.join(SM_DIR, 'public', 'extensions')
+    os.path.join(SM_DIR, 'public', 'extensions'),
+    os.path.join(SM_DIR, 'sourcepawn', 'include'),
+    os.path.join(SM_DIR, 'public', 'amtl', 'include'),  # May not be needed.
 ]
 
 program = builder.compiler.Library('socket.ext')
