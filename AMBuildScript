@@ -1,9 +1,9 @@
 # vim: set sts=2 ts=8 sw=2 tw=99 et ft=python:
 import os, sys
 # Set to location of libboost_system.so and libboost_thread.so
-BOOST_DIR = sys.environ.get('BOOST_DIR', '/usr/lib/i386-linux-gnu')
-BOOST_SYSTEM_LIB = sys.environ.get('BOOST_SYSTEM_LIB', 'libboost_system.so')
-BOOST_THREAD_LIB = sys.environ.get('BOOST_THREAD_LIB', 'libboost_thread.so')
+BOOST_DIR = os.environ.get('BOOST_DIR', '/usr/lib/i386-linux-gnu')
+BOOST_SYSTEM_LIB = os.environ.get('BOOST_SYSTEM_LIB', 'libboost_system.so')
+BOOST_THREAD_LIB = os.environ.get('BOOST_THREAD_LIB', 'libboost_thread.so')
 
 BOOST_SYSTEM_LIB = os.path.join(BOOST_DIR,BOOST_SYSTEM_LIB)
 BOOST_THREAD_LIB = os.path.join(BOOST_DIR,BOOST_THREAD_LIB)
