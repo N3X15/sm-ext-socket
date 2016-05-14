@@ -26,6 +26,6 @@ for src, dest in moves.items():
   #  os.makedirs(realnewfp)
   #  print('mkdir -p ' + realnewfp)
   builder.AddCopy(NormalizePath(src, projdir), f)
-ext_dir = NormalizePath('addons/sourcemod/extensions')
+ext_dir = NormalizePath('addons/sourcemod/extensions','')
 f = builder.AddFolder(ext_dir)
 builder.AddCopy(socket.binary, f)
