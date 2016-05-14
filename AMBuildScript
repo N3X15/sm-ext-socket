@@ -1,5 +1,12 @@
 # vim: set sts=2 ts=8 sw=2 tw=99 et ft=python:
-import os
+import os, sys
+# Set to location of libboost_system.so and libboost_thread.so
+BOOST_DIR = sys.environ.get('BOOST_DIR', '/usr/lib/i386-linux-gnu')
+BOOST_SYSTEM_LIB = sys.environ.get('BOOST_SYSTEM_LIB', 'libboost_system.so')
+BOOST_THREAD_LIB = sys.environ.get('BOOST_THREAD_LIB', 'libboost_thread.so')
+
+BOOST_SYSTEM_LIB = os.path.join(BOOST_DIR,BOOST_SYSTEM_LIB)
+BOOST_THREAD_LIB = os.path.join(BOOST_DIR,BOOST_THREAD_LIB)
 builder.DetectCompilers()
 if builder.options.debug:
   # OPT_FLAGS
@@ -7,7 +14,8 @@ if builder.options.debug:
 else:
   # DEBUG_FLAGS
   builder.compiler.cflags += '-g -ggdb3'.split()
-builder.compiler.linkflags += '-m32 -lpthread -Wl,-Bstatic -static-libgcc -L/usr/lib/i386-linux-gnu/ -lboost_thread -lboost_system -lstdc++ -Wl,-Bdynamic'.split()
+
+builder.compiler.linkflags += '-m32 -lpthread -Wl,-Bstatic -static-libgcc -l{thread} -l{system} -lstdc++ -Wl,-Bdynamic'.format(thread=BOOST_THREAD_LIB,system=BOOST_SYSTEM_LIB).split()
 builder.compiler.cflags += '-D_LINUX -DSOURCEMOD_BUILD -Wall -fPIC -m32 -Wno-c++0x-compat'.split()
 builder.compiler.cxxflags.append('-std=c++11')
 
