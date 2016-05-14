@@ -15,7 +15,7 @@ else:
   # DEBUG_FLAGS
   builder.compiler.cflags += '-g -ggdb3'.split()
 
-builder.compiler.linkflags += '-m32 -lpthread -Wl,-Bstatic -static-libgcc {thread} {system} -lstdc++ -Wl,-Bdynamic'.format(thread=BOOST_THREAD_LIB,system=BOOST_SYSTEM_LIB).split()
+builder.compiler.linkflags += '-m32 -lpthread -Wl,-Bstatic -static-libgcc -lstdc++ -Wl,-Bdynamic {thread} {system}'.format(thread=BOOST_THREAD_LIB,system=BOOST_SYSTEM_LIB).split()
 builder.compiler.cflags += '-D_LINUX -DSOURCEMOD_BUILD -Wall -fPIC -m32 -Wno-c++0x-compat'.split()
 builder.compiler.cxxflags.append('-std=c++11')
 
